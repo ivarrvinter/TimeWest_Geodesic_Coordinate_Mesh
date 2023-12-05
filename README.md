@@ -1,4 +1,4 @@
-# Custom Transformer Model for Multi-Domain Text Classification
+# TimeWest Geodesic Coordinate Mesh
 
 ## Overview
 This repository contains an implementation of a custom Transformer model designed for multi-domain text classification tasks. The model incorporates a custom architecture that includes multi-head self-attention mechanisms, feedforward layers, positional encoding, and padding masks.
@@ -12,7 +12,9 @@ The `MultiHeadAttention` module splits the input embedding into multiple heads a
 #### Mathematics:
 The attention mechanism computes scaled dot-product attention as follows:
 
-\[ \text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right) \times V \]
+$$
+\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right) \times V
+$$
 
 ### Transformer Block
 The `TransformerBlock` module consists of a single block containing multi-head attention, layer normalization, and feedforward layers.
@@ -30,8 +32,12 @@ The `CustomTransformer` module generates positional encodings to convey sequence
 #### Mathematics:
 The positional encoding is computed using sinusoidal functions:
 
-\[ \text{PE}_{(pos, 2i)} = \sin\left(\frac{pos}{10000^{(2i/d_{\text{model}})}}\right) \]
-\[ \text{PE}_{(pos, 2i+1)} = \cos\left(\frac{pos}{10000^{(2i/d_{\text{model}})}}\right) \]
+$$
+\text{PE}_{(pos, 2i)} = \sin\left(\frac{pos}{10000^{(2i/d_{\text{model}})}}\right)
+$$
+$$
+\text{PE}_{(pos, 2i+1)} = \cos\left(\frac{pos}{10000^{(2i/d_{\text{model}})}}\right)
+$$
 
 ### Padding Mask
 The `create_padding_mask` function generates a padding mask to avoid attending to padding tokens in variable-length sequences.
