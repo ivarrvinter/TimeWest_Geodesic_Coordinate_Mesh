@@ -3,20 +3,19 @@ from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 
 class Preprocessor:
-    def __init__(self, text: str = None):
-        self.text = text
-        self.tokens = None
-
-    def apply_substitution(self, rule):
-        return re.sub(rule, '', self.text) if self.text else None
+    @staticmethod
+    def apply_substitution(text: str, rule):
+        return re.sub(rule, '', text) if text else None
     
-    def convert_to_lower(self):
-        return self.text.lower() if self.text else None
+    @staticmethod
+    def convert_to_lower(text: str):
+        return text.lower() if text else None
     
-    def tokenize_text(self):
-        return word_tokenize(self.text) if self.text else []
+    @staticmethod
+    def tokenize_text(text: str):
+        return word_tokenize(text) if text else []
     
-    def lemmatize_text(self, tokens):
-        tokens = self.tokens or self.tokenize_text()
+    @staticmethod
+    def lemmatize_text(tokens):
         lemmatizer = WordNetLemmatizer()
         return [lemmatizer.lemmatize(token) for token in tokens]
