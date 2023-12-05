@@ -7,7 +7,7 @@ def main():
     seed = 42
     torch.manual_seed(seed)
 
-    text = '''A A neural network is a neural circuit of biological neurons, sometimes also called a biological neural network,
+    text = '''A neural network is a neural circuit of biological neurons, sometimes also called a biological neural network,
             or a network of artificial neurons or nodes in the case of an artificial neural network.[1]'''
 
     preprocess = Preprocessor()
