@@ -10,11 +10,17 @@ def main():
     text = '''A neural network is a neural circuit of biological neurons, sometimes also called a biological neural network,
             or a network of artificial neurons or nodes in the case of an artificial neural network.[1]'''
 
-    text = Preprocessor.apply_substitution(text, r'[\.\,\[\]\d]')
-    text = Preprocessor.convert_to_lower(text)
-    tokens = Preprocessor.tokenize_text(text)
-    word_to_index, index2word = TermVocabMapper.map_terms_to_vocab(tokens)
-    
+    vocab_mapper = TermVocabMapper()
+    preprocess = Preprocessor(vocab_mapper)
+    text = preprocess.apply_substitution(text, r'[\d\.\,\[\]]')
+    text = preprocess.convert_to_lower(text)
+    tokens = preprocess.tokenize_text(text)
+    lemmas = preprocess.lemmatize_text(tokens)
+
+    vocab_mapper.map_terms_to_vocab(lemmas)
+    tokens_to_ids = preprocess.convert_tokens_to_ids(lemmas)
+    ids_to_tokens = preprocess.convert_ids_to_tokens(tokens_to_ids)
+    # Revise
     vocab_size = len(word_to_index)
     embed_size = 512
     num_layers = 4
