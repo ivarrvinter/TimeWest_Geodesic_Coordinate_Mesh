@@ -9,6 +9,23 @@ class TermVocabMapper:
         self.word_to_index[self.unk_token] = 0
         self.index_to_word[0] = self.unk_token
 
+        self.word_to_index.update({
+            "<PAD>": 1,
+            "<START>": 2,
+            "<END>": 3
+        })
+        self.index_to_word.update({
+            1: "<PAD>",
+            2: "<START>",
+            3: "<END>"
+        })
+        self.special_tokens = {
+            "<PAD>": 1,
+            "<START>": 2,
+            "<END>": 3,
+            "[UNK]": 0
+        }
+
     def map_terms_to_vocab(self, tokens):
         index = len(self.word_to_index)
 
