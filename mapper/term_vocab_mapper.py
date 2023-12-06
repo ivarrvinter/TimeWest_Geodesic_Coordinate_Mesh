@@ -1,7 +1,5 @@
 class TermVocabMapper():
-    def __init__(self, text: list):
-        self.text = text
-
+    @staticmethod
     def map_terms_to_vocab(text):
         word_to_index = {}
         index_to_word = {}
