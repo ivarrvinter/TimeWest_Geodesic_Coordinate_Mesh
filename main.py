@@ -20,24 +20,22 @@ def main():
     vocab_mapper.map_terms_to_vocab(lemmas)
     tokens_to_ids = preprocess.convert_tokens_to_ids(lemmas)
     ids_to_tokens = preprocess.convert_ids_to_tokens(tokens_to_ids)
-    # Revise
-    vocab_size = len(word_to_index)
-    embed_size = 512
-    num_layers = 4
+
+    vocab_size = 100
+    embed_size = 128
+    num_layers = 6
     heads = 8
+    max_seq_len = len(tokens_to_ids)
 
-    indices = [word_to_index[token] for token in tokens]
-    values = torch.tensor(indices).unsqueeze(0)
-    keys = torch.tensor(indices).unsqueeze(0)
-    query = torch.tensor(indices).unsqueeze(0)
+    input_ids_tensor = torch.tensor(tokens_to_ids)
+    input_ids_tensor = input_ids_tensor.unsqueeze(0)
 
-    seq_length = len(tokens)
-    mask = torch.triu(torch.ones(seq_length, seq_length)) == 1
-    mask = mask.float().masked_fill(mask == 0, float('-inf')).masked_fill(mask == 1, float(0.0))
+    model = EmbeddingAttentionTransformer(vocab_size, embed_size, num_layers, heads, max_seq_len)
+    with torch.no_grad():
+        output = model(input_ids_tensor, max_seq_len, vocab_size)
 
-    model = EmbeddingAttentionTransformer(vocab_size, embed_size, num_layers, heads)
-    output = model(values, mask)
-    print('Output embedding is: ', output)
+    print("Output shape:", output.shape)
+    print("Model output:", output)
 
 if __name__ == '__main__':
     main()
