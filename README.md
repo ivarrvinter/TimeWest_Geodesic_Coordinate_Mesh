@@ -54,4 +54,4 @@ This cascaded transformation encapsulates the core of the Transformer architectu
 
 ## References
 - The Transformer Paper: [Attention is All You Need](https://arxiv.org/abs/1706.03762)
-- Hugging Face Transformers library: [GitHub](https://github.com/huggingface/transformers)
+- Pytorch library: [Pytorch](https://github.com/pytorch/pytorch)
